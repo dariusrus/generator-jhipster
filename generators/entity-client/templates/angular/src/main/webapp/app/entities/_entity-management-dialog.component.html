@@ -55,7 +55,9 @@ _%>
             }
         _%>
         <div class="form-group">
+            <%_ if (fieldInputType !== 'checkbox') { _%>
             <label class="form-control-label" jhiTranslate="<%= translationKey %>" for="field_<%= fieldName %>"<% if (fields[idx].javadoc) { if (enableTranslation) { %> [ngbTooltip]="'<%= keyPrefix %>help.<%= fieldName %>' | translate"<% } else { %> ngbTooltip="<%= fields[idx].javadoc %>"<% } } %>><%= fieldNameHumanized %></label>
+            <%_ } _%>
             <%_ if (fields[idx].fieldIsEnum) { _%>
             <select class="form-control" name="<%= fieldName %>" [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" id="field_<%= fieldName %>" <% if (fields[idx].fieldValidate === true && fields[idx].fieldValidateRules.includes('required')) { %> required<% } %>>
             <%_ const enumPrefix = angularAppName + '.'+ fieldType;
@@ -106,6 +108,12 @@ _%>
             <%_ } else if(fieldTypeBlobContent === 'text') { _%>
             <textarea class="form-control" name="<%= fieldName %>" id="field_<%= fieldName %>"
                 [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" <%- include ng_validators %>></textarea>
+            <%_ } else if(fieldInputType === 'checkbox') { _%>
+            <div class="custom-control custom-checkbox"> 
+                <input type="<%= fieldInputType %>" class="custom-control-input" name="<%= fieldName %>" id="field_<%= fieldName %>"
+                    [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" <%- include ng_validators %>/>
+                <label class="custom-control-label" jhiTranslate="<%= translationKey %>" for="field_<%= fieldName %>"<% if (fields[idx].javadoc) { if (enableTranslation) { %> [ngbTooltip]="'<%= keyPrefix %>help.<%= fieldName %>' | translate"<% } else { %> ngbTooltip="<%= fields[idx].javadoc %>"<% } } %>><%= fieldNameHumanized %></label>          
+            </div>
             <%_ } else { _%>
             <input type="<%= fieldInputType %>" class="form-control" name="<%= fieldName %>" id="field_<%= fieldName %>"
                 [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" <%- include ng_validators %>/>
