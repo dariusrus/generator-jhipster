@@ -58,8 +58,8 @@ import java.net.URISyntaxException;
 import java.util.LinkedList;<% } %>
 import java.util.List;
 import java.util.Optional;<% if (databaseType === 'cassandra') { %>
-import java.util.UUID;<% } %><% if (!viaService && (fieldsContainNoOwnerOneToOne === true)) { %>
-import java.util.stream.Collectors;<% } %><% if (fieldsContainNoOwnerOneToOne === true) { %>
+import java.util.UUID;<% } %><% if (!viaService && (searchEngine === 'elasticsearch' || fieldsContainNoOwnerOneToOne === true)) { %>
+import java.util.stream.Collectors;<% } %><% if (searchEngine === 'elasticsearch' || fieldsContainNoOwnerOneToOne === true) { %>
 import java.util.stream.StreamSupport;<% } %><% if (searchEngine === 'elasticsearch') { %>
 
 import static org.elasticsearch.index.query.QueryBuilders.*;<% } %>
