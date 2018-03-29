@@ -32,6 +32,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 <%_ } _%>
 
+import java.util.Optional;
+
 /**
  * Service Interface for managing <%= entityClass %>.
  */
@@ -67,7 +69,7 @@ public interface <%= entityClass %>Service {
      * @param id the id of the entity
      * @return the entity
      */
-    <%= instanceType %> findOne(<%= pkType %> id);
+    Optional<<%= instanceType %>> findById(<%= pkType %> id);
 
     /**
      * Delete the "id" <%= entityInstance %>.

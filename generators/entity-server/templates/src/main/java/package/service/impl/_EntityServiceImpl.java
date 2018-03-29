@@ -53,6 +53,7 @@ import java.util.stream.StreamSupport;<% } %><% if (searchEngine === 'elasticsea
 
 import static org.elasticsearch.index.query.QueryBuilders.*;<% } %>
 
+import java.util.Optional;
 /**
  * Service Implementation for managing <%= entityClass %>.
  */
@@ -112,7 +113,7 @@ public class <%= serviceClassName %><% if (service === 'serviceImpl') { %> imple
     <%_ if (databaseType === 'sql') { _%>
     @Transactional(readOnly = true)
     <%_ } _%>
-    public <%= instanceType %> findOne(<%= pkType %> id) {
+    public Optional<<%= instanceType %>> findById(<%= pkType %> id) {
         log.debug("Request to get <%= entityClass %> : {}", id);<%- include('../../common/get_template', {viaService: viaService, returnDirectly:true}); -%>
     }
 
