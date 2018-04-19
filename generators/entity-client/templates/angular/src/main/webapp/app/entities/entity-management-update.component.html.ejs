@@ -17,7 +17,7 @@
  limitations under the License.
 -%>
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-xl-6 col-lg-8 col-md-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="<%= jhiPrefixDashed %>-<%= entityFileName %>-heading" jhiTranslate="<%= i18nKeyPrefix %>.home.createOrEditLabel">Create or edit a <%= entityClassHumanized %></h2>
             <div>
@@ -49,7 +49,9 @@
                     }
                 _%>
                 <div class="form-group">
+                    <%_ if (fieldInputType !== 'checkbox') { _%>
                     <label class="form-control-label" jhiTranslate="<%= translationKey %>" for="field_<%= fieldName %>"<% if (fields[idx].javadoc) { if (enableTranslation) { %> [ngbTooltip]="'<%= i18nKeyPrefix %>.help.<%= fieldName %>' | translate"<% } else { %> ngbTooltip="<%= fields[idx].javadoc %>"<% } } %>><%= fieldNameHumanized %></label>
+                    <%_ } _%>
                     <%_ if (fields[idx].fieldIsEnum) { _%>
                     <select class="form-control" name="<%= fieldName %>" [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" id="field_<%= fieldName %>" <% if (fields[idx].fieldValidate === true && fields[idx].fieldValidateRules.includes('required')) { %> required<% } %>>
                     <%_ const enumPrefix = angularAppName + '.'+ fieldType;
@@ -100,6 +102,12 @@
                     <%_ } else if (fieldTypeBlobContent === 'text') { _%>
                     <textarea class="form-control" name="<%= fieldName %>" id="field_<%= fieldName %>"
                         [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" <%- include ng_validators %>></textarea>
+                    <%_ } else if (fieldInputType === 'checkbox') { _%>
+                    <div class="custom-control custom-checkbox"> 
+                        <input type="<%= fieldInputType %>" class="custom-control-input" name="<%= fieldName %>" id="field_<%= fieldName %>"
+                            [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" <%- include ng_validators %>/>
+                        <label class="custom-control-label" jhiTranslate="<%= translationKey %>" for="field_<%= fieldName %>"<% if (fields[idx].javadoc) { if (enableTranslation) { %> [ngbTooltip]="'<%= i18nKeyPrefix %>.help.<%= fieldName %>' | translate"<% } else { %> ngbTooltip="<%= fields[idx].javadoc %>"<% } } %>><%= fieldNameHumanized %></label>
+                    </div>
                     <%_ } else { _%>
                     <input type="<%= fieldInputType %>" class="form-control" name="<%= fieldName %>" id="field_<%= fieldName %>"
                         [(ngModel)]="<%= entityInstance %>.<%= fieldName %>" <%- include ng_validators %>/>
