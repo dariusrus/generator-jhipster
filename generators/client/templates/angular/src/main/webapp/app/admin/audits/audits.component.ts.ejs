@@ -106,7 +106,7 @@ export class AuditsComponent implements OnInit, OnDestroy {
     }
 
     sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        const result = [this.predicate + ',' + (this.reverse ? 'up' : 'down')];
         if (this.predicate !== 'id') {
             result.push('id');
         }
@@ -124,7 +124,7 @@ export class AuditsComponent implements OnInit, OnDestroy {
         this.router.navigate(['/audits'], {
             queryParams: {
                 page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                sort: this.predicate + ',' + (this.reverse ? 'up' : 'down')
             }
         });
         this.loadAll();

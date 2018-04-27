@@ -102,7 +102,7 @@
                 <%_ if (searchEngine === 'elasticsearch') { _%>
                 search: this.currentSearch,
                 <%_ } _%>
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                sort: this.predicate + ',' + (this.reverse ? 'up' : 'down')
             }
         });
         this.loadAll();
@@ -115,7 +115,7 @@
         <%_ } _%>
         this.router.navigate(['/<%= entityUrl %>', {
             page: this.page,
-            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            sort: this.predicate + ',' + (this.reverse ? 'up' : 'down')
         }]);
         this.loadAll();
     }
@@ -131,7 +131,7 @@
         this.router.navigate(['/<%= entityUrl %>', {
             search: this.currentSearch,
             page: this.page,
-            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            sort: this.predicate + ',' + (this.reverse ? 'up' : 'down')
         }]);
         this.loadAll();
     }

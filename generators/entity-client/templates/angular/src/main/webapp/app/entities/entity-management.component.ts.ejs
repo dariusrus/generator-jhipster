@@ -84,7 +84,7 @@ export class <%= entityAngularName %>Component implements OnInit, OnDestroy {
         <%_ if (databaseType !== 'cassandra') { _%>
 
     sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        const result = [this.predicate + ',' + (this.reverse ? 'up' : 'down')];
         if (this.predicate !== 'id') {
             result.push('id');
         }
